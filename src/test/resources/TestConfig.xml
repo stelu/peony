@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="2" name="ulive"
+	skipfailedinvocationcounts="false" junit="false" parallel="classes"
+	data-provider-thread-count="2" annotations="JDK">
+
+<listeners>
+	<listener class-name="peony.asserts.PeonyAssertionListener" />
+</listeners>
+
+	<parameter name="browser" value="*chrome"/>
+	<parameter name="useLocalRC" value="true"/>
+<!-- 	 <parameter name="userAgent" value="Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; da-dk) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5"/> -->
+
+</suite>

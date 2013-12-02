@@ -1,4 +1,4 @@
-package main.java.ulive.pages;
+package ulive.pages;
 
 
 public class UliveCompletedContactUSPage {

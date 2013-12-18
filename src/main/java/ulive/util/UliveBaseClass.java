@@ -18,12 +18,14 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.webdriver.SikuliFirefoxDriver;
+import org.testng.annotations.AfterClass;
 
 import peony.asserts.PeonyAssertion;
 
@@ -41,14 +43,20 @@ public class UliveBaseClass {
 
 	private Logger logger = LogManager.getLogger(UliveBaseClass.class);
 
+	public UliveBaseClass(WebDriver driver) {	
+		this.driver = driver;
+	}
+	
 	public UliveBaseClass(String browser) {
 		if (browser.contains("firefox")) {
 
 			// FirefoxProfile profile = new FirefoxProfile();
 			// profile.addExtension(new File(firebugPath));
-			// driver = new FirefoxDriver(profile);
-			driver = new SikuliFirefoxDriver();
-			
+			//driver = new FirefoxDriver(profile);
+			//driver = new SikuliFirefoxDriver();
+			driver = new FirefoxDriver();
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+	        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		} else if (browser.contains("chrome")) {
 			
 			System.setProperty("webdriver.chrome.driver",
@@ -57,26 +65,31 @@ public class UliveBaseClass {
 			capability.setCapability("chrome.switches",
 			    Arrays.asList("--verbose"));
 			driver = new ChromeDriver();
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+	        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		} else if (browser.contains("safari")) {
 			driver = new SafariDriver();
-		}
-		
-                
+		}         
 
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		driver.quit();
 	}
 
 	public String loadUliveURL(String environment) {
 
 		if (environment.equalsIgnoreCase("qa")) {
 			url = magnoliaConstant.uliveURL_QA;
-		} else if (environment.equalsIgnoreCase("dev")) {
+		}else if (environment.equalsIgnoreCase("qa2")) {
+			url = magnoliaConstant.uliveURL_QA2;
+		}else if (environment.equalsIgnoreCase("dev")) {
 			url = magnoliaConstant.uliveURL_Dev;
 		} else {
 			url = magnoliaConstant.uliveURL_Live;
 		}
 
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
 		driver.manage().window().maximize();
 		return url;
@@ -216,8 +229,10 @@ public class UliveBaseClass {
 
 	protected KeyWord[] autocompleteAPICall(String searchTerm) throws Exception {
 		// read json data from autocomplete api call
-		driver.get("http://ulive.qa.psddev.com/ajax/getTypeAhead.jsp?q="
+		driver.get(magnoliaConstant.uliveURL_QA + "/ajax/getTypeAhead.jsp?q="
 				+ searchTerm);
+//		driver.get("http://ulive.qa.psddev.com/ajax/getTypeAhead.jsp?q="
+//				+ searchTerm);
 		Thread.sleep(2000);
 		String body = driver.findElement(By.tagName("body")).getText();
 

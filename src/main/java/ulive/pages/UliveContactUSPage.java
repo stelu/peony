@@ -19,9 +19,7 @@ public class UliveContactUSPage {
 	public static final String CONTACTUS_YOURMSG_TEXTFIELD = "//form[@id='contactUs']/div/div/textarea";
 	public static final String CONTACTUS_SUBMIT_BUTTON = "//button[@id='submitBttn']";
 	
-	public String getCONTACTUS_EMAIL_TEXTFIELD() {
-		return CONTACTUS_EMAIL_TEXTFIELD;
-	}
+	
 	
 	
 }

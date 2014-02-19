@@ -4,37 +4,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import peony.asserts.PeonyAssertion;
-import peony.user.User;
 import ulive.pages.UliveCompletedContactUSPage;
-import ulive.pages.UliveContactUSPage;
 import ulive.util.UliveBaseClass;
 
-public class UliveCompletedContactUsPageHelper extends UliveCompletedContactUSPage {
+public class UliveCompletedContactUsPageHelper extends UliveCompletedContactUSPage 
+{
 	private UliveBaseClass uliveBaseClass;
 	protected WebDriver driver;
 	
-	public UliveCompletedContactUsPageHelper(WebDriver driver) {
+	public UliveCompletedContactUsPageHelper(WebDriver driver) 
+	{
 		this.driver = driver;
 		uliveBaseClass = new UliveBaseClass(driver);
 	}
 	
-	public String getCOMPLETEDCONTACTUS_VIEWOURFAQ_LINK() {
-		return COMPLETEDCONTACTUS_VIEWOURFAQ_LINK;
-	}
-	
-	public String getCOMPLETEDCONTACTUS_CONTACTUS_LINK() {
-		return COMPLETEDCONTACTUS_CONTACTUS_LINK;
-	}
-	
-	public void clickCOMPLETEDCONTACTUS_VIEWOURFAQ_LINK() {
+	public void clickCOMPLETEDCONTACTUS_VIEWOURFAQ_LINK() 
+	{
 		driver.findElement(By.xpath(COMPLETEDCONTACTUS_VIEWOURFAQ_LINK)).click();
 	}
 	
-	public void clickCOMPLETEDCONTACTUS_CONTACTUS_LINK() {
+	public void clickCOMPLETEDCONTACTUS_CONTACTUS_LINK() 
+	{
 		driver.findElement(By.xpath(COMPLETEDCONTACTUS_CONTACTUS_LINK)).click();
 	}
 	
-	public void verifyCompletedContactUSPage() {
+	public void verifyCompletedContactUSPage() 
+	{
 		PeonyAssertion.verifyTrue(uliveBaseClass.isElementPresent(By
 				.xpath(COMPLETEDCONTACTUS_VIEWOURFAQ_LINK)),
 				"View Our FAQs link is displayed on the Completed Contact Us Page");

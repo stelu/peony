@@ -1,10 +1,18 @@
 package ulive.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class UliveHomePage_Footer {
 
+public class UliveHomePage_Footer 
+{
+
+	protected WebDriver driver;
+	
 	//newsletter module
 	public static final String HOMEPAGEFOOTER_EMAIL_TEXTFIELD = "//input[@id='emailInput']";
+	public static final String HOMEPAGEFOOTER_EMAILSUCCESS = "//input[@class='hasChar checking success']";
 	public static final String HOMEPAGEFOOTER_SIGNUP_BUTTON = "//button[@id='newsLetterSubmit']";
 	public static final String HOMEPAGEFOOTER_FACEBOOK_ICON = "//ul[@class='social']/li[2]/a/i";
 	public static final String HOMEPAGEFOOTER_TWITTER_ICON = "//ul[@class='social']/li[3]/a/i";
@@ -25,7 +33,6 @@ public class UliveHomePage_Footer {
 	public static final String HOMEPAGEFOOTER_HOLMESISBACK_LINK = "//a[contains(text(),'Holmes is Back')]";
 	public static final String HOMEPAGEFOOTER_BLOGCABIN_LINK = "//a[contains(text(),'Blog Cabin')]";
 	public static final String HOMEPAGEFOOTER_SALVAGEDAWGS_LINK = "//a[contains(text(),'Salvage Dawgs')]";
-	
 	
 	//Food Network
 	public static final String HOMEPAGEFOOTER_FOODNETWORK_ICON = "//img[@alt='Food Network']";
@@ -64,5 +71,31 @@ public class UliveHomePage_Footer {
 	public static final String HOMEPAGEFOOTER_INFRINGEMENTS_LINK = "//a[contains(text(), 'Infringements')]";
 	public static final String HOMEPAGEFOOTER_TERMS_LINK = "//a[contains(text(), 'Terms Of Use')]";
 	public static final String HOMEPAGEFOOTER_PRIVACY_LINK = "//a[contains(text(), 'Privacy Policy')]";
+	
+	public UliveHomePage_Footer(WebDriver driver) 
+	{
+		this.driver = driver;
+	}
+	
+	public String getHOMEPAGEFOOTER_EMAIL_TEXTFIELD() 
+	{
+		return HOMEPAGEFOOTER_EMAIL_TEXTFIELD;
+	}
+	
+	public WebElement getHOMEPAGEFOOTER_EMAILSUCCESS() 
+	{
+		return driver.findElement(By.xpath(HOMEPAGEFOOTER_EMAILSUCCESS));
+	}
+	
+	public WebElement getHOMEPAGEFOOTER_SIGNUP_BUTTON() 
+	{
+		return driver.findElement(By.xpath(HOMEPAGEFOOTER_SIGNUP_BUTTON));
+	}
+	
+	public void setHOMEPAGEFOOTER_EMAIL_TEXTFIELD(String email) 
+	{
+		driver.findElement(By.xpath(HOMEPAGEFOOTER_EMAIL_TEXTFIELD)).clear();
+		driver.findElement(By.xpath(HOMEPAGEFOOTER_EMAIL_TEXTFIELD)).sendKeys(email);
+	}
 	
 }

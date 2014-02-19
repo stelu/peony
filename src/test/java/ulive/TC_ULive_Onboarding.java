@@ -1,27 +1,14 @@
 package ulive;
 
-import java.util.Iterator;
-import java.util.List;
-
-import ulive.pages.UliveHomePage_MenuBar;
-import ulive.pages.UliveHomePage_MenuNav;
-import ulive.pages.UliveHomePage_Onboarding;
-import ulive.pages.UliveSearchPage;
-import ulive.util.UliveBaseClass;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import peony.asserts.PeonyAssertion;
+import ulive.helper.UliveHomePage_OnboardingHelper;
+import ulive.pages.UliveHomePage_MenuNav;
+import ulive.util.UliveBaseClass;
 
 /**
- * work in progress...
  * 
  * This test case tests the onboarding scenario Browser clear cache/cookie load
  * ulive site, verify onboarding overlay. this will set cookie load ulive site
@@ -32,95 +19,42 @@ import peony.asserts.PeonyAssertion;
  * @author slu
  * 
  */
-public class TC_ULive_Onboarding extends UliveBaseClass {
+public class TC_ULive_Onboarding extends UliveBaseClass 
+{
+	private UliveHomePage_OnboardingHelper uliveHomePage_OnboardingHelper = new UliveHomePage_OnboardingHelper(driver);
 
-	@Parameters({ "browser" })
-	public TC_ULive_Onboarding(String browser) {
-		super(browser);
+	@Parameters({ "sauceLab", "browser" })
+	public TC_ULive_Onboarding(boolean sauceLab, String browser) throws Exception
+	{
+		super(sauceLab, browser);
 	}
 
 	@Test
-	public void test() throws Exception {
+	public void test() throws Exception 
+	{
 
-		loadUliveURL("qa");
+		loadUliveURL();
 
 		waitImplicitly(10000);
 
 		// verify Onboarding overlay
-		PeonyAssertion.verifyTrue(isTextPresent("where you find videos."),
-				"'Here's where you find videos' text is displayed");
-		PeonyAssertion.verifyTrue(isTextPresent("Welcome to ulive"),
-				"'Welcome to ulive' text is present");
-
-		PeonyAssertion.verifyTrue(isElementPresent(By
-				.xpath(UliveHomePage_Onboarding.ONBOARDING_PARTNERLOGOS_ICON)),
-				"Logos section is displayed");
-
+		uliveHomePage_OnboardingHelper.verifyOnboardingOverlay();
 		waitUntilElementVisible(UliveHomePage_MenuNav.MENUNAV_INACTIVE_ICON);
-		// closeOnboarding();
 
-		loadUliveURL("qa");
+		loadUliveURL();
 
-		PeonyAssertion.verifyTrue(isElementPresent(By
-				.xpath(UliveHomePage_Onboarding.ONBOARDING_BLUEBAR_IMAGE)),
-				"Blue bar is displayed");
-
-		PeonyAssertion
-				.verifyTrue(
-						driver.findElement(
-								By.xpath(UliveHomePage_Onboarding.ONBOARDING_BLUEBAR_IMAGE))
-								.getText()
-								.contains(
-										"We see that you're new here — welcome!Start exploring"),
-						"Bluebar text is correct");
+		uliveHomePage_OnboardingHelper.verifyOnboardingBluebar();
 
 		driver.findElement(
-				By.xpath("//div[@class='module media-module lead with-chyron-ext']/div/a/i"))
+				By.xpath("//div[@class='module media-module lead with-chyron-ext']/div/a/img"))
 				.click();
 
 		waitImplicitly(5000);
 
-		PeonyAssertion.verifyTrue(isElementPresent(By
-				.xpath(UliveHomePage_Onboarding.ONBOARDING_BLUEBAR_IMAGE)),
-				"Blue bar is displayed");
+		uliveHomePage_OnboardingHelper.verifyOnboardingBluebar();
 
-		PeonyAssertion.verifyTrue(isElementPresent(By
-				.xpath(UliveHomePage_Onboarding.ONBOARDING_SIDEBAR_TOOLTIP)),
-				"Side bar tooltip is displayed");
-
-		PeonyAssertion
-				.verifyTrue(
-						driver.findElement(
-								By.xpath(UliveHomePage_Onboarding.ONBOARDING_SIDEBAR_TOOLTIP))
-								.getText()
-								.contains(
-										"Like what you see? Share this video or find out more about it over here."),
-						"Sidebar text is correct");
-
-		PeonyAssertion.verifyTrue(isElementPresent(By
-				.xpath(UliveHomePage_Onboarding.ONBOARDING_BELOWBAR_TOOLTIP)),
-				"Below bar tooltip is displayed");
-
-		PeonyAssertion
-				.verifyTrue(
-						driver.findElement(
-								By.xpath(UliveHomePage_Onboarding.ONBOARDING_SIDEBAR_TOOLTIP))
-								.getText()
-								.contains(
-										"Ready for another? Find your next video in our recommendation list below."),
-						"Sidebar text is correct");
-
-		// WebElement autoComplete = driver.findElement(By
-		// .xpath(UliveHomePage_Onboarding.ONBOARDING_BLUEBAR_IMAGE));
-		// WebElement e = autoComplete.findElement(By.tagName("span"));
-		//
-		// System.out.println("message " + autoComplete.getText());
-		// System.out.println(driver.findElement(By.xpath("//span[@class='message]")).getText());
+		uliveHomePage_OnboardingHelper.verifyOnboardingBubbles();
 
 	}
 
-	@AfterClass
-	public void tearDown() {
-		driver.quit();
-	}
 }

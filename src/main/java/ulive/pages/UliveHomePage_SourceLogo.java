@@ -1,6 +1,7 @@
 package ulive.pages;
 
-public class UliveHomePage_SourceLogo {
+public class UliveHomePage_SourceLogo 
+{
 
 	//main page links
 	public static final String SOURCELOGOBAR_IMAGE = "//div[@class='module source-logo-module items-5']";

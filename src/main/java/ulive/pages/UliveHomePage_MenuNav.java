@@ -1,15 +1,20 @@
 package ulive.pages;
 
+import org.openqa.selenium.WebDriver;
 
-public class UliveHomePage_MenuNav {
+
+public class UliveHomePage_MenuNav 
+{
 
 	public static final String MENUNAV_INACTIVE_ICON = "//a[@class='menu-toggle-btn inactive']";
+	//public static final String MENUNAV_INACTIVE_ICON = "//div[@class='mainnav-container']/nav/a";
 	public static final String MENUNAV_ACTIVE_ICON = "//a[@class='menu-toggle-btn active']";
 	
 	//slider submenu links
 	public static final String MENUNAV_FULLEPISODES_LINK = "//a[contains(text(),'Full Episodes')]";
 	public static final String MENUNAV_ORIGSERIES_LINK = "//a[contains(text(),'Original Series')]";
 	public static final String MENUNAV_FOOD_LINK = "//a[contains(text(),'Food')]";
+	public static final String MENUNAV_FOOD_LI = "//li[@class='has-submenu']";
 	public static final String MENUNAV_PARENTING_LINK = "//a[contains(text(),'Parenting')]";
 	public static final String MENUNAV_WELLNESS_LINK = "//a[contains(text(),'Wellness')]";
 	public static final String MENUNAV_HOMEVIDEOS_LINK = "//a[contains(text(),'Home')]";
@@ -39,6 +44,7 @@ public class UliveHomePage_MenuNav {
 	public static final String FOOD_POPULARINGREDIENTS_LINK = "//a[contains(text(),'Popular Ingredients')]";
 	public static final String FOOD_QUICKANDEASYCOOKING_LINK = "//a[contains(text(),'Quick & Easy Cooking')]";
 	public static final String FOOD_HEALTHYCOOKING_LINK = "//a[contains(text(),'Healthy Cooking')]";
+	public static final String FOOD_HEALTHYCOOKING_LI = "//ul[@class='menu submenu active']/li[5]";
 	public static final String FOOD_COOKINGTECHNIQUES_LINK = "//a[contains(text(),'Cooking Techniques')]";
 	public static final String FOOD_SLOWCOOKING_LINK = "//a[contains(text(),'Slow Cooking')]";
 	public static final String FOOD_GRILLING_LINK = "//a[contains(text(),'Grilling')]";
@@ -99,5 +105,12 @@ public class UliveHomePage_MenuNav {
 	public static final String FOODNETWORK_GIRLTRIPS_LINK = "//a[contains(text(),'Girl Trips')]";
 	public static final String FOODNETWORK_MANCATIONS_LINK = "//a[contains(text(),'Mancations')]";
 	public static final String FOODNETWORK_TRAVELWITHKIDS_LINK = "//a[contains(text(),'Travel with Kids')]";
+	
+	protected WebDriver driver;
+	
+	public UliveHomePage_MenuNav(WebDriver driver) 
+	{
+		this.driver = driver;
+	}
 	
 }

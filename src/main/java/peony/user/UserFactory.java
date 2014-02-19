@@ -12,14 +12,13 @@ public class UserFactory {
 
 	public static User createUser() {
 
-		userEmailAddress = "userEmail" + generateRandomSuffix(3)
-				+ "@scrippsnetworks.com";
+		userEmailAddress = "userEmail" + generateRandomSuffix(3)+ "@sni.com";
 		userFirstName = "Bobby" + generateRandomCharacters(2);
 		userLastName = "Flay" + generateRandomCharacters(2);
 		userHomeAddress = generateRandomSuffix(3) + " " + "Mission Street";
 		userHomePhoneNumber = "415-645-" + generateRandomSuffix(4);
 		userBirthYear = "19" + generateRandomSuffix(2);
-
+		
 		return createUser(userEmailAddress, userFirstName, userLastName,
 				userHomeAddress, "San Francisco", "CA", "94105",
 				userHomePhoneNumber, userBirthYear);
@@ -30,14 +29,25 @@ public class UserFactory {
 		userFirstName = "Bobby" + generateRandomCharacters(2);
 		userLastName = "Flay" + generateRandomCharacters(2);
 		userHomeAddress = generateRandomSuffix(3) + " " + "Mission Street";
-		userHomePhoneNumber = "415-691-" + generateRandomSuffix(4);
+		userHomePhoneNumber = "415-645-" + generateRandomSuffix(4);
 		userBirthYear = "19" + generateRandomSuffix(2);
-
+		
 		return createUser(emailAddress, userFirstName, userLastName,
 				userHomeAddress, "San Francisco", "CA", "94105",
 				userHomePhoneNumber, userBirthYear);
 	}
-
+	
+	public static User createUser(String emailAddress, String fName, String lName) {
+		
+		userHomeAddress = generateRandomSuffix(3) + " " + "Mission Street";
+		userHomePhoneNumber = "415-645-" + generateRandomSuffix(4);
+		userBirthYear = "19" + generateRandomSuffix(2);
+		
+		return createUser(emailAddress, fName, lName,
+				userHomeAddress, "San Francisco", "CA", "94105",
+				userHomePhoneNumber, userBirthYear);
+	}
+	
 	public static User createUser(String emailAddress, String firstName,
 			String lastName, String homeAddress, String homeCity,
 			String homeState, String homeZip, String homePhoneNumber,
